@@ -1,10 +1,10 @@
 <template>
   <div class="basic bgImg1">
     <div class="box">
-      <div class="left">
+      <div class="left" @click="goto('consumer')">
         <span>我要订餐</span>
       </div>
-      <div class="right">
+      <div class="right" @click="goto('manage')">
         <span>后台管理</span>
       </div>
     </div>
@@ -26,6 +26,11 @@ export default {
   },
   methods: {
     // init () {}
+    goto (path) {
+      this.$router.push({
+        path: '/' + path
+      })
+    }
   },
   created () {},
   mounted () {

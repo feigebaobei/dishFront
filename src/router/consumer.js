@@ -7,6 +7,12 @@ const consumer = [
     },
     children: [
       {
+        path: '',
+        component: resolve => {
+          require(['@/views/consumer/market'], resolve)
+        }
+      },
+      {
         path: 'market',
         component: resolve => {
           require(['@/views/consumer/market'], resolve)

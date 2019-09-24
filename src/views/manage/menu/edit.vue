@@ -1,6 +1,6 @@
 <template>
-  <div class="menu">
-    <p>menu</p>
+  <div class="edit">
+    <p>edit</p>
   </div>
 </template>
 
@@ -30,6 +30,6 @@ export default {
 
 <style scoped="" lang="stylus">
 @import '~@/assets/stylus/basic.styl'
-  .menu
+  .edit
     // color: #333
 </style>
