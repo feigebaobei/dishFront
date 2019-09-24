@@ -1,22 +1,53 @@
 <template>
-  <div class="login"></div>
+  <div class="login bgImg1">
+    <Form class="form" :model="userInfo" :label-width="80" :rules="ruleValidate" ref="form">
+      <form-item label="账号" prop="username">
+        <Input v-model="userInfo.username" type="text" placeholder="请输入账号"/>
+      </form-item>
+      <form-item label="密码" prop="password">
+        <Input v-model="userInfo.password" type="password" placeholder="请输入密码"/>
+      </form-item>
+      <form-item>
+        <Button type="primary">提交</Button>
+        <Button type="default" @click="resetForm">重置</Button>
+      </form-item>
+    </Form>
+  </div>
 </template>
 
 <script>
-// import comp from '@/components/common/comp.vue'
+import { Form, FormItem, Input, Button } from 'iview'
 export default {
   data () {
     return {
+      userInfo: {
+        username: '',
+        password: ''
+      },
+      ruleValidate: {
+        username: [
+          {required: true, message: '请输入正确的账号', trigger: 'change'}
+        ],
+        password: [
+          {required: true, message: '请输入正确的密码', trigger: 'change'}
+        ]
+      }
     }
   },
   // watch: {},
   // filters: {},
   // computed {},
   components: {
-    // comp
+    Form,
+    FormItem,
+    Input,
+    Button
   },
   methods: {
     // init () {}
+    resetForm () {
+      this.$refs.form.resetFields()
+    }
   },
   created () {},
   mounted () {
@@ -28,5 +59,22 @@ export default {
 <style scoped="" lang="stylus">
 @import '~@/assets/stylus/basic.styl'
   .login
-    color: #333
+    position: fixed
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .form
+      background-color: $bgColor
+      color: #fff
+      border-radius: 8px
+      flex-basis: 300px
+      padding: 18px
+      padding-left: 0
+
+
 </style>

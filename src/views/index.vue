@@ -1,5 +1,5 @@
 <template>
-  <div class="basic bgImg1">
+  <div class="index bgImg1">
     <div class="box">
       <div class="left" @click="goto('consumer')">
         <span>我要订餐</span>
@@ -42,8 +42,7 @@ export default {
 <style scoped="" lang="stylus">
 @import '~@/assets/stylus/basic.styl'
 
-  .basic
-    color: red
+  .index
     position: fixed
     top: 0
     right: 0
