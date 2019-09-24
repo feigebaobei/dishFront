@@ -5,6 +5,7 @@
 <script>
 // import comp from '@/components/common/comp.vue'
 export default {
+  // props: {},
   data () {
     return {
     }
