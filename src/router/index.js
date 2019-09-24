@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import consumer from './consumer.js'
 
 Vue.use(Router)
 
@@ -14,7 +15,6 @@ export default new Router({
     {
       path: '/index',
       name: 'index',
-      // component: index
       component: (resolve) => {
         require(['@/views/index'], resolve)
       }
@@ -26,12 +26,6 @@ export default new Router({
         require(['@/views/login'], resolve)
       }
     },
-    {
-      path: '/market',
-      name: 'market',
-      component: (resolve) => {
-        require(['@/views/market'], resolve)
-      }
-    }
+    ...consumer
   ]
 })
