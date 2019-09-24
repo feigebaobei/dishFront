@@ -57,7 +57,7 @@ export default {
 
       .left,
       .right
-        background-color: $background-color
+        background-color: $bgColor
         color: #fff
         border-radius: 8px
         margin: 0 8px

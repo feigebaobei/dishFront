@@ -29,5 +29,5 @@ export default {
 <style scoped="" lang="stylus">
 @import '~@/assets/stylus/basic.styl'
   .basicBox
-    color: #333
+    // color: #333
 </style>

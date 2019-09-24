@@ -25,6 +25,13 @@ export default new Router({
       component: (resolve) => {
         require(['@/views/login'], resolve)
       }
+    },
+    {
+      path: '/market',
+      name: 'market',
+      component: (resolve) => {
+        require(['@/views/market'], resolve)
+      }
     }
   ]
 })
