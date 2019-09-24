@@ -36,6 +36,12 @@ const manage = [
             }
           },
           {
+            path: 'add',
+            component: resolve => {
+              require(['@/views/manage/menu/add'], resolve)
+            }
+          },
+          {
             path: 'query',
             component: resolve => {
               require(['@/views/manage/menu/query'], resolve)

@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Router from 'vue-router'
+import 'iview/dist/styles/iview.css'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push (location) {

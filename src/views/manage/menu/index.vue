@@ -1,5 +1,5 @@
 <template>
-  <div class="menu">
+  <div class="menuBox">
     <router-view></router-view>
   </div>
 </template>
@@ -30,6 +30,6 @@ export default {
 
 <style scoped="" lang="stylus">
 @import '~@/assets/stylus/basic.styl'
-  .menu
+  .menuBox
     // color: #333
 </style>

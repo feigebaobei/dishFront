@@ -56,6 +56,14 @@ export default {
           children: [
             {
               imgUrl: '',
+              text: '新建菜品',
+              route: '/manage/menu/add',
+              dirImg: '',
+              extend: false,
+              children: []
+            },
+            {
+              imgUrl: '',
               text: '查询菜品',
               route: '/manage/menu/query',
               dirImg: '',
