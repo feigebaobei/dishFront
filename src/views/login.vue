@@ -1,5 +1,5 @@
 <template>
-  <div class="basicBox"></div>
+  <div class="login"></div>
 </template>
 
 <script>
@@ -27,6 +27,6 @@ export default {
 
 <style scoped="" lang="stylus">
 @import '~@/assets/stylus/basic.styl'
-  .basicBox
+  .login
     color: #333
 </style>
