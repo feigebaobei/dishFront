@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import consumer from './consumer.js'
+import manage from './manage.js'
 
 Vue.use(Router)
 
@@ -26,6 +27,7 @@ export default new Router({
         require(['@/views/login'], resolve)
       }
     },
-    ...consumer
+    ...consumer,
+    ...manage
   ]
 })
