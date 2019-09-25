@@ -39,9 +39,15 @@ export default {
       }).catch(err => {
         console.log(err)
         this.$router.push({
-          path: '/login'
+          path: '/login',
+          query: {
+            url: this.opUrl(`/${path}`)
+          }
         })
       })
+    },
+    opUrl (str) {
+      return encodeURIComponent(str)
     }
   },
   created () {},
