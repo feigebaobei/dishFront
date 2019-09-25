@@ -8,6 +8,9 @@
       <item v-for="(item, index) in dataMenu" :key="index" :imgUrl="item.imgUrl" :text="item.text" :route="item.route" :dirImg="item.dirImg" v-model="item.extend" :children="item.children"></item>
     </div>
     <div class="cont">
+      <div class="test">
+        <button @click="sendCookie">test cookie</button>
+      </div>
       <router-view></router-view>
     </div>
   </div>
@@ -16,6 +19,7 @@
 <script>
 import linkedMenu from '@/components/common/linkedMenu/index'
 import item from '@/components/common/linkedMenu/item'
+import api from '@/assets/lib/api'
 export default {
   // props: {},
   data () {
@@ -92,6 +96,9 @@ export default {
   },
   methods: {
     // init () {}
+    sendCookie () {
+      api.testCookie()
+    }
   },
   created () {},
   mounted () {

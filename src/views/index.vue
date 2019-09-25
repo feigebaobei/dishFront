@@ -13,6 +13,7 @@
 
 <script>
 // import comp from '@/components/common/comp.vue'
+import api from '@/assets/lib/api'
 export default {
   data () {
     return {
@@ -27,8 +28,19 @@ export default {
   methods: {
     // init () {}
     goto (path) {
-      this.$router.push({
-        path: '/' + path
+      // 是否登录
+      // 是 进入相应页面
+      // 否 去登录页面
+      api.isLogin().then(res => {
+        console.log(res)
+        this.$router.push({
+          path: '/' + path
+        })
+      }).catch(err => {
+        console.log(err)
+        this.$router.push({
+          path: '/login'
+        })
       })
     }
   },

@@ -8,7 +8,9 @@
         <Input v-model="userInfo.password" type="password" placeholder="请输入密码"/>
       </form-item>
       <form-item>
-        <Button type="primary">提交</Button>
+        <Button type="primary" @click="submit">提交</Button>
+        <Button type="primary" @click="root">root</Button>
+        <Button type="primary" @click="sendCookie">send cookie</Button>
         <Button type="default" @click="resetForm">重置</Button>
       </form-item>
     </Form>
@@ -17,12 +19,14 @@
 
 <script>
 import { Form, FormItem, Input, Button } from 'iview'
+import api from '@/assets/lib/api'
+// import axios from 'axios'
 export default {
   data () {
     return {
       userInfo: {
-        username: '',
-        password: ''
+        username: 'first',
+        password: 'password'
       },
       ruleValidate: {
         username: [
@@ -45,6 +49,49 @@ export default {
   },
   methods: {
     // init () {}
+    submit () {
+      // 使用axios
+      // axios({
+      //   url: 'https://localhost:3443/users/login',
+      //   method: 'post',
+      //   withCredentials: true,
+      //   data: {
+      //     username: this.userInfo.username,
+      //     password: this.userInfo.password
+      //   }
+      // }).then(res => {
+      //   console.log(res)
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+      // return
+      // 使用axios
+      api.login({
+        username: this.userInfo.username,
+        password: this.userInfo.password
+      }).then(res => {
+        console.log(res)
+        this.$router.push({
+          path: '/manage'
+        })
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    root () {
+      api.root().then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    sendCookie () {
+      api.cookie().then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
     resetForm () {
       this.$refs.form.resetFields()
     }
@@ -75,6 +122,5 @@ export default {
       flex-basis: 300px
       padding: 18px
       padding-left: 0
-
 
 </style>
