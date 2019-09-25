@@ -1,11 +1,14 @@
 <template>
   <div class="welcome">
+    <Card>
     <p>welcome to here</p>
+    </Card>
   </div>
 </template>
 
 <script>
 // import comp from '@/components/common/comp.vue'
+import { Card } from 'iview'
 export default {
   // props: {},
   data () {
@@ -16,7 +19,7 @@ export default {
   // filters: {},
   // computed {},
   components: {
-    // comp
+    Card
   },
   methods: {
     // init () {}
