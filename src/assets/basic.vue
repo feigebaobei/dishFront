@@ -21,7 +21,7 @@ export default {
   },
   created () {},
   mounted () {
-    // init()
+    // this.init()
   }
 }
 </script>

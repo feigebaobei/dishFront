@@ -1,7 +1,7 @@
 <template>
   <div class="manage">
     <Sider class="menu">
-      <Menu active-name="0-0" theme="dark" width="auto" :open-names="openNames" @on-select="slMenu">
+      <Menu :active-name="activeName" theme="dark" width="auto" :open-names="openNames" @on-select="slMenu">
         <Submenu name="1">
           <template slot="title">
             <Icon type="ios-navigate"></Icon>用户管理
@@ -42,68 +42,8 @@ export default {
   data () {
     return {
       isCollapsed: false,
-      openNames: [], // ['1']
-      dataMenu: [
-        {
-          imgUrl: '',
-          text: '用户管理',
-          route: '/user', // 路由
-          dirImg: '',
-          extend: true,
-          children: [
-            {
-              imgUrl: '',
-              text: '用户管理-0',
-              route: '/user/', // 路由
-              dirImg: '',
-              extend: false,
-              children: []
-            },
-            {
-              imgUrl: '',
-              text: '用户管理-1',
-              route: '/user/', // 路由
-              dirImg: '',
-              extend: false,
-              children: []
-            }
-          ]
-        },
-        {
-          imgUrl: '',
-          text: '菜品管理',
-          // route: '/manage/menu',
-          route: '',
-          dirImg: '',
-          extend: true,
-          children: [
-            {
-              imgUrl: '',
-              text: '新建菜品',
-              route: '/manage/menu/add',
-              dirImg: '',
-              extend: false,
-              children: []
-            },
-            {
-              imgUrl: '',
-              text: '查询菜品',
-              route: '/manage/menu/query',
-              dirImg: '',
-              extend: false,
-              children: []
-            },
-            {
-              imgUrl: '',
-              text: '编辑菜品',
-              route: '/manage/menu/edit',
-              dirImg: '',
-              extend: false,
-              children: []
-            }
-          ]
-        }
-      ]
+      activeName: '',
+      openNames: [] // ['1']
     }
   },
   // watch: {},
@@ -123,7 +63,14 @@ export default {
     BreadcrumbItem
   },
   methods: {
-    // init () {}
+    init () {
+      this.opMenu() // 显示当前路由对应的菜单
+    },
+    opMenu () {
+      console.log(this.$route)
+      let {path} = this.$route
+      this.activeName = path
+    },
     gotoPage (path) {
       console.log(path)
     },
@@ -139,7 +86,7 @@ export default {
   },
   created () {},
   mounted () {
-    // init()
+    this.init()
   }
 }
 </script>
