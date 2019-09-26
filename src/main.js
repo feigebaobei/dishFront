@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import Router from 'vue-router'
 import 'iview/dist/styles/iview.css'
+import 'element-ui/lib/theme-chalk/index.css'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push (location) {

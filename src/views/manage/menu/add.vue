@@ -64,12 +64,12 @@ export default {
   data () {
     return {
       menu: {
-        name: '甜甜圈',
-        description: '好吃的',
-        taste: '1.1',
-        price: '32.68',
-        compose: '糖，水',
-        status: '1'
+        name: '',
+        description: '',
+        taste: '',
+        price: '',
+        compose: '',
+        status: ''
       },
       ruleValidate: {
         name: [

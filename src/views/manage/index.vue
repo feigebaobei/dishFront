@@ -67,7 +67,6 @@ export default {
       this.opMenu() // 显示当前路由对应的菜单
     },
     opMenu () {
-      console.log(this.$route)
       let {path} = this.$route
       this.activeName = path
     },

@@ -1,12 +1,19 @@
 <template>
-  <div class="basicBox"></div>
+  <div class="basicBox">
+    <p v-html="text"></p>
+  </div>
 </template>
 
 <script>
 // import comp from '@/components/common/comp.vue'
 export default {
-  // props: {},
-  // name: '',
+  props: {
+    text: {
+      type: String,
+      default: ''
+    }
+  },
+  name: 'Test',
   data () {
     return {
     }
@@ -30,5 +37,5 @@ export default {
 <style scoped="" lang="stylus">
 @import '~@/assets/stylus/basic.styl'
   .basicBox
-    // color: #333
+    color: red
 </style>

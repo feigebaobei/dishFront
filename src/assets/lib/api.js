@@ -47,6 +47,9 @@ const obj = {
   addDish: params => {
     return instance.post('dish', params)
   },
+  queryDish: params => {
+    return instance.get('dish', params)
+  },
   // test
   root: params => {
     return instance.post('users', params)
