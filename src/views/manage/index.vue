@@ -175,7 +175,7 @@ export default {
     margin-left: 200px
 
     .cont
-      padding: 0 16px 16px
+      padding: 16px
 
       .breadCrumb
         margin: 16px 0
