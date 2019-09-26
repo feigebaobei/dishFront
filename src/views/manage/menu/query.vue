@@ -17,7 +17,6 @@
         <form-item>
           <Button type="primary" @click="submit">查询</Button>
           <Button type="default" @click="reset">重置</Button>
-          <button-vue type="default" @click="reset">重置</button-vue>
         </form-item>
       </Form>
       <!-- 筛选结果 -->
@@ -34,6 +33,8 @@
           </template>
         </table-column>
       </Table>
+      <!-- <Page :total="45" size="small" show-elevator show-sizer /> -->
+      <Page class="page" :page-size-opts="selectOptions.pageSizeList" :total="table.page.total" size="small" show-elevator show-sizer @on-change="changePageNumber" @on-page-size-change="changePageSize" />
     </Card>
   </div>
 </template>
@@ -41,9 +42,9 @@
 <script>
 // import { Card, Form, FormItem, Input, Select, Option, Button, Table } from 'iview'
 // iview的table不能正确渲染button.所以使用element的table
-import { Card, Form, FormItem, Input, Select, Option } from 'iview'
+import { Card, Form, FormItem, Input, Select, Option, Page } from 'iview'
 import { Button, Table, TableColumn } from 'element-ui'
-import qs from 'qs'
+// import qs from 'qs'
 import api from '@/assets/lib/api'
 export default {
   // props: {},
@@ -113,7 +114,10 @@ export default {
             value: '4.3',
             label: '重度咸'
           }
-        ]
+        ],
+        pageNumber: 0,
+        pageSize: 10,
+        pageSizeList: [1, 2, 5, 10, 20]
       },
       table: {
         data: [
@@ -124,7 +128,10 @@ export default {
           //   price: '',
           //   _id: '' // id
           // }
-        ]
+        ],
+        page: {
+          total: 0
+        }
       }
     }
   },
@@ -140,7 +147,8 @@ export default {
     Option,
     // Button,
     // Table,
-    buttonVue: Button,
+    // buttonVue: Button,
+    Page,
     // 下面是使用element的组件
     Button,
     Table,
@@ -152,12 +160,15 @@ export default {
     submit () {
       let data = {
         name: this.selectOptions.name,
-        taste: this.selectOptions.taste
+        taste: this.selectOptions.taste,
+        page: this.selectOptions.pageNumber,
+        size: this.selectOptions.pageSize
       }
       // api.queryDish(qs.stringify(data)).then(res => {
       api.queryDish({params: data}).then(res => {
         if (res.data.result) {
-          this.table.data = res.data.data
+          this.table.data = res.data.data.dishes
+          this.table.page.total = res.data.data.amount
         } else {
           throw new Error(res.data.message || 'data error')
         }
@@ -175,6 +186,14 @@ export default {
           id: id
         }
       })
+    },
+    changePageNumber (n) {
+      this.selectOptions.pageNumber = n - 1
+      this.submit()
+    },
+    changePageSize (size) {
+      this.selectOptions.pageSize = size
+      this.submit()
     }
   },
   created () {},
@@ -187,5 +206,8 @@ export default {
 <style scoped="" lang="stylus">
 @import '~@/assets/stylus/basic.styl'
   .query
-    // color: #333
+
+    .page
+      margin-top: 16px;
+
 </style>
