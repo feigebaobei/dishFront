@@ -47,8 +47,16 @@ const obj = {
   addDish: params => {
     return instance.post('dish', params)
   },
-  queryDish: params => {
-    return instance.get('dish', params)
+  queryDish: data => {
+    return instance.get('dish', {params: data})
+  },
+  // 编辑指定菜品
+  editDish: (dishId, params) => {
+    return instance.put(`dish/${dishId}`, params)
+  },
+  // 请求指定菜品的详细数据
+  detailDish: (dishId) => {
+    return instance.get(`dish/${dishId}`)
   },
   // test
   root: params => {

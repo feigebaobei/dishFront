@@ -39,13 +39,9 @@
         </form-item>
         <form-item label="状态" prop="status">
           <RadioGroup v-model="menu.status">
-            <Radio label="1">Male</Radio>
-            <Radio label="0">Female</Radio>
+            <Radio label="1">上架</Radio>
+            <Radio label="0">下架</Radio>
           </RadioGroup>
-          <!-- <radio-group v-model="menu.status">
-            <Radio :label="1">上架</Radio>
-            <Radio :label="0">下架</Radio>
-          </radio-group> -->
         </form-item>
         <form-item>
           <Button type="primary" @click="submit">提交</Button>

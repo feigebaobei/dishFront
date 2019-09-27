@@ -165,7 +165,8 @@ export default {
         size: this.selectOptions.pageSize
       }
       // api.queryDish(qs.stringify(data)).then(res => {
-      api.queryDish({params: data}).then(res => {
+      // api.queryDish({params: data}).then(res => {
+      api.queryDish(data).then(res => {
         if (res.data.result) {
           this.table.data = res.data.data.dishes
           this.table.page.total = res.data.data.amount
