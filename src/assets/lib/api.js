@@ -58,6 +58,10 @@ const obj = {
   detailDish: (dishId) => {
     return instance.get(`dish/${dishId}`)
   },
+  // 删除指定的数据
+  deleteDish: (dishId) => {
+    return instance.delete(`dish/${dishId}`)
+  },
   // test
   root: params => {
     return instance.post('users', params)

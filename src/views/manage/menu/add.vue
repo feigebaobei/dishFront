@@ -3,9 +3,18 @@
     <Card>
       <!-- 三个图片。大图：用于菜品详情的banner。中图：用于菜品列表。小图：用于在购物车显示 -->
       <Form class="form" :model="menu" :label-width="80" :rules="ruleValidate" ref="form">
-        <!-- <form-item prop="">
-          <p>upload img</p>
-        </form-item> -->
+        <div class="imgBox">
+          <show-img ref="imgVueBig" :previewSize="'big'" @getImg="getImgBig"></show-img>
+          <p>一般用于大图。如：banner。</p>
+        </div>
+        <div class="imgBox">
+          <show-img ref="imgVueMiddle" :previewSize="'middle'" @getImg="getImgMiddle"></show-img>
+          <p>一般用于中图。如：列表图</p>
+        </div>
+        <div class="imgBox">
+          <show-img ref="imgVueSmall" :previewSize="'small'" @getImg="getImgSmall"></show-img>
+          <p>一般用于小图。如：缩略图</p>
+        </div>
         <form-item label="名称" prop="name">
           <Input v-model="menu.name" placeholder="请输入"/>
         </form-item>
@@ -14,21 +23,7 @@
         </form-item>
         <form-item label="口味" prop="taste">
           <Select v-model="menu.taste" placeholder="请选择">
-            <Option value="0.1">轻度酸</Option>
-            <Option value="0.2">中度酸</Option>
-            <Option value="0.3">重度酸</Option>
-            <Option value="1.1">轻度甜</Option>
-            <Option value="1.2">中度甜</Option>
-            <Option value="1.3">重度甜</Option>
-            <Option value="2.1">轻度苦</Option>
-            <Option value="2.2">中度苦</Option>
-            <Option value="2.3">重度苦</Option>
-            <Option value="3.1">轻度辣</Option>
-            <Option value="3.2">中度辣</Option>
-            <Option value="3.3">重度辣</Option>
-            <Option value="4.1">轻度咸</Option>
-            <Option value="4.2">中度咸</Option>
-            <Option value="4.3">重度咸</Option>
+            <Option v-for="(item, index) in menu.tasteList" :key="index" :value="item.value">{{item.label}}</Option>
           </Select>
         </form-item>
         <form-item label="价格" prop="price">
@@ -43,6 +38,16 @@
             <Radio label="0">下架</Radio>
           </RadioGroup>
         </form-item>
+        <form-item label="种类" prop="category">
+          <Select v-model="menu.category" placeholder="请选择">
+            <Option v-for="(item, index) in menu.categoryList" :key="index" :value="item.value">{{item.label}}</Option>
+          </Select>
+        </form-item>
+        <form-item label="菜系" prop="series">
+          <Select v-model="menu.series" placeholder="请选择">
+            <Option v-for="(item, index) in menu.seriesList" :key="index" :value="item.value">{{item.label}}</Option>
+          </Select>
+        </form-item>
         <form-item>
           <Button type="primary" @click="submit">提交</Button>
           <Button type="default" @click="resetForm">重置</Button>
@@ -55,17 +60,25 @@
 <script>
 import { Card, Form, FormItem, Input, Select, Option, Button, RadioGroup, Radio, Message } from 'iview'
 import api from '@/assets/lib/api'
+import config from '@/assets/lib/config'
+import showImg from '@/components/common/showImg'
 export default {
   // props: {},
   data () {
     return {
       menu: {
         name: '',
+        images: [{}, {}, {}],
         description: '',
         taste: '',
+        tasteList: config.tasteList,
         price: '',
+        category: '',
+        categoryList: config.categoryList,
         compose: '',
-        status: ''
+        status: '',
+        series: '',
+        seriesList: config.seriesList
       },
       ruleValidate: {
         name: [
@@ -75,7 +88,17 @@ export default {
           {required: true, message: '请输入说明', trigger: 'change'}
         ],
         taste: [
-          {required: true, message: '请选择状态', trigger: 'change'}
+          {
+            required: true,
+            validator: (rule, value, cb) => {
+              if (value) {
+                cb()
+              } else {
+                cb(new Error('请选择口味'))
+              }
+            },
+            trigger: 'change'
+          }
         ],
         price: [
           {required: true, message: '请输入价格', trigger: 'change'}
@@ -101,7 +124,8 @@ export default {
     Option,
     Button,
     RadioGroup,
-    Radio
+    Radio,
+    showImg
   },
   methods: {
     // init () {}
@@ -126,6 +150,18 @@ export default {
     },
     resetForm () {
       this.$refs['form'].resetFields()
+    },
+    mImgUrl () {
+
+    },
+    getImgBig (img) {
+      this.menu.images[0] = img
+    },
+    getImgMiddle (img) {
+      this.menu.images[1] = img
+    },
+    getImgSmall (img) {
+      this.menu.images[2] = img
     }
   },
   created () {},
@@ -141,4 +177,10 @@ export default {
     // color: #333
     .form
       width: 600px
+
+    .imgBox
+      display: inline-block
+      margin-right: 16px
+      margin-bottom: 16px
+
 </style>

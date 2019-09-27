@@ -1,65 +1,111 @@
 const tasteList = [
   {
     label: '轻度酸',
-    value: '0.1'
+    value: 100
   },
   {
     label: '中度酸',
-    value: '0.2'
+    value: 101
   },
   {
     label: '重度酸',
-    value: '0.3'
+    value: 102
   },
   {
     label: '轻度甜',
-    value: '1.1'
+    value: 200
   },
   {
     label: '中度甜',
-    value: '1.2'
+    value: 201
   },
   {
     label: '重度甜',
-    value: '1.3'
+    value: 202
   },
   {
     label: '轻度苦',
-    value: '2.1'
+    value: 300
   },
   {
     label: '中度苦',
-    value: '2.2'
+    value: 301
   },
   {
     label: '重度苦',
-    value: '2.3'
+    value: 302
   },
   {
     label: '轻度辣',
-    value: '3.1'
+    value: 400
   },
   {
     label: '中度辣',
-    value: '3.2'
+    value: 401
   },
   {
     label: '重度辣',
-    value: '3.3'
+    value: 402
   },
   {
     label: '轻度咸',
-    value: '4.1'
+    value: 500
   },
   {
     label: '中度咸',
-    value: '4.2'
+    value: 501
   },
   {
     label: '重度咸',
-    value: '4.3'
+    value: 502
+  }
+]
+const categoryList = [
+  {
+    label: '热菜',
+    value: 100
+  },
+  {
+    label: '冷菜',
+    value: 200
+  }
+]
+const seriesList = [
+  {
+    label: '鲁菜',
+    value: 100
+  },
+  {
+    label: '川菜',
+    value: 200
+  },
+  {
+    label: '粤菜',
+    value: 300
+  },
+  {
+    label: '苏菜',
+    value: 400
+  },
+  {
+    label: '闽菜',
+    value: 500
+  },
+  {
+    label: '浙菜',
+    value: 600
+  },
+  {
+    label: '湘菜',
+    value: 700
+  },
+  {
+    label: '徽菜',
+    value: 800
   }
 ]
 export default {
-  tasteList: tasteList
+  tasteList: tasteList,
+  categoryList: categoryList,
+  seriesList: seriesList
 }
