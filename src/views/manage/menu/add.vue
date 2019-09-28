@@ -2,7 +2,7 @@
   <div class="add">
     <Card>
       <!-- 三个图片。大图：用于菜品详情的banner。中图：用于菜品列表。小图：用于在购物车显示 -->
-      <Form class="form" :model="menu" :label-width="80" :rules="ruleValidate" ref="form">
+      <Form class="form" :model="menu" :label-width="80" :rules="ruleValidate" ref="form" entype="multipart/form-data">
         <div class="imgBox">
           <show-img ref="imgVueBig" :previewSize="'big'" @getImg="getImgBig"></show-img>
           <p>一般用于大图。如：banner。</p>
@@ -67,17 +67,34 @@ export default {
   data () {
     return {
       menu: {
-        name: '',
-        images: [{}, {}, {}],
-        description: '',
-        taste: '',
+        // name: '',
+        // imageBig: {},
+        // imageMiddle: {},
+        // imageSmall: {},
+        // description: '',
+        // taste: '',
+        // tasteList: config.tasteList,
+        // price: '',
+        // category: '',
+        // categoryList: config.categoryList,
+        // compose: '',
+        // status: '',
+        // series: '',
+        // seriesList: config.seriesList
+
+        name: '234',
+        imageBig: 'sdf',
+        imageMiddle: 'fg',
+        imageSmall: 'rhd',
+        description: 'we',
+        taste: 100,
         tasteList: config.tasteList,
-        price: '',
-        category: '',
+        price: '12.36',
+        category: 100,
         categoryList: config.categoryList,
-        compose: '',
-        status: '',
-        series: '',
+        compose: 'dfse',
+        status: '1',
+        series: 100,
         seriesList: config.seriesList
       },
       ruleValidate: {
@@ -130,12 +147,22 @@ export default {
   methods: {
     // init () {}
     submit () {
+          console.log(api.addDish)
       this.$refs['form'].validate(valid => {
         if (valid) {
           api.addDish({
+            // imageBig: this.menu.price
+            // imageMiddle: this.menu.price
+            // imageSmall: this.menu.price
             name: this.menu.name,
             description: this.menu.description,
-            price: this.menu.price
+            price: this.menu.price,
+            taste: this.menu.taste,
+            price: this.menu.price,
+            compose: this.menu.compose,
+            status: this.menu.status,
+            category: this.menu.category,
+            series: this.menu.series
           }).then(res => {
             console.log(res)
             Message.success('Success!')
@@ -155,13 +182,16 @@ export default {
 
     },
     getImgBig (img) {
-      this.menu.images[0] = img
+      // this.menu.images[0] = img
+      this.menu.imageBig = img
     },
     getImgMiddle (img) {
-      this.menu.images[1] = img
+      // this.menu.images[1] = img
+      this.menu.imageMiddle = img
     },
     getImgSmall (img) {
-      this.menu.images[2] = img
+      // this.menu.images[2] = img
+      this.menu.imageSmall = img
     }
   },
   created () {},

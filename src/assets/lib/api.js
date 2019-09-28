@@ -4,7 +4,7 @@ const instance = axios.create({
   baseURL: 'https://localhost:3443/',
   timeout: 5000,
   headers: {
-    // 'Access-Control-Allow-Origin': ''
+    'Content-Type': 'application/x-www-form-urlencoded'
   },
   // withCredentials: 'include'
   responseType: 'text',
