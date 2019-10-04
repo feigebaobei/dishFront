@@ -48,25 +48,27 @@ export default {
   methods: {
     // init () {}
     submit () {
-      api.login({
-        username: this.userInfo.username,
-        password: this.userInfo.password
-      }).then(res => {
-        if (this.url) {
-          let urlDecode = decodeURIComponent(this.url)
-          if (/^http/.test(urlDecode)) {
-            location.replace(urlDecode)
+      // api.login({
+      //   username: this.userInfo.username,
+      //   password: this.userInfo.password
+      // })
+      api.login(`username=${this.userInfo.username}&password=${this.userInfo.password}`)
+        .then(res => {
+          if (this.url) {
+            let urlDecode = decodeURIComponent(this.url)
+            if (/^http/.test(urlDecode)) {
+              location.replace(urlDecode)
+            } else {
+              this.$router.replace({
+                path: urlDecode
+              })
+            }
           } else {
-            this.$router.replace({
-              path: urlDecode
-            })
+            this.$router.go(-1)
           }
-        } else {
-          this.$router.go(-1)
-        }
-      }).catch(err => {
-        console.log(err)
-      })
+        }).catch(err => {
+          console.log(err)
+        })
     },
     resetForm () {
       this.$refs.form.resetFields()
