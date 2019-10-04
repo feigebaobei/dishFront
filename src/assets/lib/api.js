@@ -1,23 +1,29 @@
 import axios from 'axios'
 
-const instance = axios.create({
+// const instance = axios.create({
+//   baseURL: 'https://localhost:3443/',
+//   timeout: 5000,
+//   headers: {
+//     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+//   },
+//   withCredentials: true
+// })
+
+let option = {
   baseURL: 'https://localhost:3443/',
   timeout: 5000,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
   },
-  // withCredentials: 'include'
-  responseType: 'text',
   withCredentials: true
-})
-
+}
 // instance.defaults.transformRequest = [(data) => {...}]
 
-instance.interceptors.request.use(config => { // config是axios的配置项
-  return config
-}, error => {
-  return Promise.reject(error)
-})
+// instance.interceptors.request.use(config => { // config是axios的配置项
+//   return config
+// }, error => {
+//   return Promise.reject(error)
+// })
 // instance.interceptors.response.use(response => {
 //   return response
 // }, error => {
@@ -37,13 +43,28 @@ instance.interceptors.request.use(config => { // config是axios的配置项
 //   return Promise.reject(error.response.data)
 // })
 
+let instance = (opt) => {
+  let inst = axios.create(Object.assign(option, opt))
+  inst.interceptors.request.use(config => { // config是axios的配置项
+    return config
+  }, error => {
+    return Promise.reject(error)
+  })
+  return inst
+}
+
 const obj = {
-  isLogin: params => {
-    return instance.post('users/isLogin', params)
+  isLogin: (opt) => {
+    // return instance.post('users/isLogin')
+    return instance(opt).post('users/isLogin')
   },
-  login: params => {
-    return instance.post('users/login', params)
+  login: (params, opt = {}) => {
+    // return instance.post('users/login', params)
+    return instance(opt).post('users/login', params)
   },
+  // login: data => {
+  //   return instance.post('users/login', {params: data})
+  // },
   addDish: params => {
     return instance.post('dish', params)
   },
