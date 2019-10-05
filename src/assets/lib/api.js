@@ -1,4 +1,5 @@
 import axios from 'axios'
+import qs from 'qs'
 
 let option = {
   baseURL: 'https://localhost:3443/',
@@ -50,8 +51,11 @@ const obj = {
     // return instance.post('dish', params)
     return instance(opt).post('dish', params)
   },
-  queryDish: data => {
-    return instance.get('dish', {params: data})
+  queryDish: (params, opt = {}) => {
+    // console.log(params, opt)
+    let qsString = qs.stringify(params)
+    return instance(opt).get('dish' + '?' + qsString)
+    // return instance(opt).get('dish', params)
   },
   // 编辑指定菜品
   editDish: (dishId, params) => {

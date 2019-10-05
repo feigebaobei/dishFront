@@ -23,10 +23,40 @@
       <!-- <Table border :columns="table.columns" :data="table.data">
       </Table> -->
       <Table :data="table.data" border>
+        <table-column type="expand">
+          <template slot-scope="props">
+            <p>
+              <span style="margin-right: 12px;">配料</span>
+              <span v-html="props.row.compose"></span>
+            </p>
+            <p>
+              <span style="margin-right: 12px;">说明</span>
+              <span v-html="props.row.description"></span>
+            </p>
+          </template>
+        </table-column>
         <table-column label="菜名" prop="name"></table-column>
         <table-column label="价格" prop="price"></table-column>
-        <table-column label="状态" prop="status"></table-column>
-        <table-column label="操作" fixed="right">
+        <table-column label="菜系" prop="series"></table-column>
+        <table-column label="分类" prop="category"></table-column>
+        <table-column label="状态" prop="status">
+          <template slot-scope="scope">
+            <span v-html="scope.row.status ? '上架' : '下架'"></span>
+          </template>
+        </table-column>
+        <!-- <table-column label="配料" prop="compose"></table-column> -->
+        <table-column label="是否删除" prop="delete">
+          <template slot-scope="scope">
+            <span v-html="scope.row.delete ? '已删除' : '未删除'"></span>
+          </template>
+        </table-column>
+        <!-- <table-column label="说明" prop="description"></table-column> -->
+        <table-column label="imageBig" prop="imageBig"></table-column>
+        <table-column label="imageMiddle" prop="imageMiddle"></table-column>
+        <table-column label="imageSmall" prop="imageSmall"></table-column>
+        <table-column label="创建时间" prop="createdAt"></table-column>
+        <table-column label="最近更新时间" prop="updatedAt"></table-column>
+        <table-column label="操作" fixed="right" min-width="150px">
           <!-- 通过 Scoped slot 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据，用法参考 demo。 -->
           <template slot-scope="scope">
             <Button @click="edit(scope.row._id)" type="primary" size="small">编辑</Button>
@@ -47,6 +77,7 @@ import { Card, Form, FormItem, Input, Select, Option, Page } from 'iview'
 import { Button, Table, TableColumn } from 'element-ui'
 // import qs from 'qs'
 import api from '@/assets/lib/api'
+import config from '@/assets/lib/config'
 export default {
   // props: {},
   data () {
@@ -54,69 +85,8 @@ export default {
       selectOptions: {
         name: '',
         taste: [],
-        tasteList: [
-          {
-            value: '0.1',
-            label: '轻度酸'
-          },
-          {
-            value: '0.2',
-            label: '中度酸'
-          },
-          {
-            value: '0.3',
-            label: '重度酸'
-          },
-          {
-            value: '1.1',
-            label: '轻度甜'
-          },
-          {
-            value: '1.2',
-            label: '中度甜'
-          },
-          {
-            value: '1.3',
-            label: '重度甜'
-          },
-          {
-            value: '2.1',
-            label: '轻度苦'
-          },
-          {
-            value: '2.2',
-            label: '中度苦'
-          },
-          {
-            value: '2.3',
-            label: '重度苦'
-          },
-          {
-            value: '3.1',
-            label: '轻度辣'
-          },
-          {
-            value: '3.2',
-            label: '中度辣'
-          },
-          {
-            value: '3.3',
-            label: '重度辣'
-          },
-          {
-            value: '4.1',
-            label: '轻度咸'
-          },
-          {
-            value: '4.2',
-            label: '中度咸'
-          },
-          {
-            value: '4.3',
-            label: '重度咸'
-          }
-        ],
-        pageNumber: 0,
+        tasteList: config.tasteList,
+        pageNumber: 1,
         pageSize: 10,
         pageSizeList: [1, 2, 5, 10, 20]
       },
@@ -158,11 +128,15 @@ export default {
   },
   methods: {
     // init () {}
+    mStatus (status) {
+      return status ? '上架' : '下架'
+    },
     submit () {
+      this.selectOptions.pageNumber = 1
       let data = {
         name: this.selectOptions.name,
         taste: this.selectOptions.taste,
-        page: this.selectOptions.pageNumber,
+        page: this.selectOptions.pageNumber - 1,
         size: this.selectOptions.pageSize
       }
       // api.queryDish(qs.stringify(data)).then(res => {
@@ -198,7 +172,7 @@ export default {
       })
     },
     changePageNumber (n) {
-      this.selectOptions.pageNumber = n - 1
+      this.selectOptions.pageNumber = n
       this.submit()
     },
     changePageSize (size) {
