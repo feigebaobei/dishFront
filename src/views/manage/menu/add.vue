@@ -67,36 +67,20 @@ export default {
   data () {
     return {
       menu: {
-        // name: '',
-        // imageBig: {},
-        // imageMiddle: {},
-        // imageSmall: {},
-        // description: '',
-        // taste: '',
-        // tasteList: config.tasteList,
-        // price: '',
-        // category: '',
-        // categoryList: config.categoryList,
-        // compose: '',
-        // status: '',
-        // series: '',
-        // seriesList: config.seriesList
-
-        // name: '234',
-        name: `${String(Math.floor(Math.random() * 100000))}`,
-        imageBig: 'sdf',
-        imageMiddle: 'fg',
-        imageSmall: 'rhd',
-        imageTest: 'imageTest',
-        description: 'we',
-        taste: 100,
+        name: '',
+        imageBig: '',
+        imageMiddle: '',
+        imageSmall: '',
+        imageTest: '',
+        description: '',
+        taste: 0,
         tasteList: config.tasteList,
-        price: '12.36',
-        category: 100,
+        price: '',
+        category: 0,
         categoryList: config.categoryList,
-        compose: 'dfse',
-        status: '1',
-        series: 100,
+        compose: '',
+        status: '',
+        series: 0,
         seriesList: config.seriesList
       },
       ruleValidate: {
@@ -189,15 +173,12 @@ export default {
 
     },
     getImgBig (img) {
-      // this.menu.images[0] = img
       this.menu.imageBig = img
     },
     getImgMiddle (img) {
-      // this.menu.images[1] = img
       this.menu.imageMiddle = img
     },
     getImgSmall (img) {
-      // this.menu.images[2] = img
       this.menu.imageSmall = img
     }
   },
