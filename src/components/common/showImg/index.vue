@@ -84,14 +84,18 @@ export default {
     changeFile () {
       let input = this.$refs.input
       let file = input.files[0]
+      // 同步父子组件间的数据
+      this.$emit('getImg', file)
+      // 异步显示图片
       let fileReader = new FileReader()
       fileReader.readAsDataURL(file)
+      // fileReader.readAsBinaryString(file)
       fileReader.onload = (e) => {
         // e: ProgressEvent 事件的处理程序
         // e.target 这里是FileReader对象
         let res = e.target.result
         this.dataImg = res
-        this.$emit('getImg', this.dataImg)
+        // this.$emit('getImg', this.dataImg)
       }
     }
   },

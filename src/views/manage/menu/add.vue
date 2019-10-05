@@ -82,10 +82,12 @@ export default {
         // series: '',
         // seriesList: config.seriesList
 
-        name: '234',
+        // name: '234',
+        name: `${String(Math.floor(Math.random() * 100000))}`,
         imageBig: 'sdf',
         imageMiddle: 'fg',
         imageSmall: 'rhd',
+        imageTest: 'imageTest',
         description: 'we',
         taste: 100,
         tasteList: config.tasteList,
@@ -147,23 +149,28 @@ export default {
   methods: {
     // init () {}
     submit () {
-          console.log(api.addDish)
       this.$refs['form'].validate(valid => {
         if (valid) {
-          api.addDish({
-            // imageBig: this.menu.price
-            // imageMiddle: this.menu.price
-            // imageSmall: this.menu.price
-            name: this.menu.name,
-            description: this.menu.description,
-            price: this.menu.price,
-            taste: this.menu.taste,
-            price: this.menu.price,
-            compose: this.menu.compose,
-            status: this.menu.status,
-            category: this.menu.category,
-            series: this.menu.series
-          }).then(res => {
+          let fd = new FormData()
+          fd.append('imageBig', this.menu.imageBig)
+          fd.append('imageMiddle', this.menu.imageMiddle)
+          fd.append('imageSmall', this.menu.imageSmall)
+          fd.append('name', this.menu.name)
+          fd.append('description', this.menu.description)
+          fd.append('price', this.menu.price)
+          fd.append('taste', this.menu.taste)
+          fd.append('compose', this.menu.compose)
+          fd.append('status', this.menu.status)
+          fd.append('category', this.menu.category)
+          fd.append('series', this.menu.series)
+          api.addDish(
+            fd,
+            // Content-Type 不需要设置.会自动设置
+            {
+              // headers: {
+              //   'Content-Type': 'multipart/form-data'
+              // }
+            }).then(res => {
             console.log(res)
             Message.success('Success!')
           }).catch(err => {

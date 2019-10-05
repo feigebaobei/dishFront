@@ -1,14 +1,5 @@
 import axios from 'axios'
 
-// const instance = axios.create({
-//   baseURL: 'https://localhost:3443/',
-//   timeout: 5000,
-//   headers: {
-//     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-//   },
-//   withCredentials: true
-// })
-
 let option = {
   baseURL: 'https://localhost:3443/',
   timeout: 5000,
@@ -19,11 +10,6 @@ let option = {
 }
 // instance.defaults.transformRequest = [(data) => {...}]
 
-// instance.interceptors.request.use(config => { // config是axios的配置项
-//   return config
-// }, error => {
-//   return Promise.reject(error)
-// })
 // instance.interceptors.response.use(response => {
 //   return response
 // }, error => {
@@ -55,18 +41,14 @@ let instance = (opt) => {
 
 const obj = {
   isLogin: (opt) => {
-    // return instance.post('users/isLogin')
     return instance(opt).post('users/isLogin')
   },
   login: (params, opt = {}) => {
-    // return instance.post('users/login', params)
     return instance(opt).post('users/login', params)
   },
-  // login: data => {
-  //   return instance.post('users/login', {params: data})
-  // },
-  addDish: params => {
-    return instance.post('dish', params)
+  addDish: (params, opt = {}) => {
+    // return instance.post('dish', params)
+    return instance(opt).post('dish', params)
   },
   queryDish: data => {
     return instance.get('dish', {params: data})
