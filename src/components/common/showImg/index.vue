@@ -40,7 +40,7 @@ export default {
   // name: '',
   data () {
     return {
-      dataImg: null
+      dataImg: this.imgUrl
     }
   },
   // watch: {},
