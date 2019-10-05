@@ -43,7 +43,11 @@ export default {
       dataImg: this.imgUrl
     }
   },
-  // watch: {},
+  watch: {
+    imgUrl (value) {
+      this.dataImg = value
+    }
+  },
   // filters: {},
   computed: {
     compStyle () {
