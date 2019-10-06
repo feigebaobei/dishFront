@@ -58,12 +58,13 @@ const obj = {
     // return instance(opt).get('dish', params)
   },
   // 编辑指定菜品
-  editDish: (dishId, params) => {
-    return instance.put(`dish/${dishId}`, params)
+  editDish: (dishId, params, opt = {}) => {
+    return instance(opt).put(`dish/${dishId}`, params)
   },
   // 请求指定菜品的详细数据
-  detailDish: (dishId) => {
-    return instance.get(`dish/${dishId}`)
+  detailDish: (dishId, opt = {}) => {
+    // return instance.get(`dish/${dishId}`)
+    return instance(opt).get(`dish/${dishId}`)
   },
   // 删除指定的数据
   deleteDish: (dishId) => {

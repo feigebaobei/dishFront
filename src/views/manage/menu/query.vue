@@ -15,7 +15,7 @@
           </Select>
         </form-item>
         <form-item>
-          <Button type="primary" @click="submit">查询</Button>
+          <Button type="primary" @click="submit(true)">查询</Button>
           <Button type="default" @click="reset">重置</Button>
         </form-item>
       </Form>
@@ -75,7 +75,6 @@
 // iview的table不能正确渲染button.所以使用element的table
 import { Card, Form, FormItem, Input, Select, Option, Page } from 'iview'
 import { Button, Table, TableColumn } from 'element-ui'
-// import qs from 'qs'
 import api from '@/assets/lib/api'
 import config from '@/assets/lib/config'
 export default {
@@ -131,16 +130,16 @@ export default {
     mStatus (status) {
       return status ? '上架' : '下架'
     },
-    submit () {
-      this.selectOptions.pageNumber = 1
+    submit (bool) {
+      if (bool) {
+        this.selectOptions.pageNumber = 1
+      }
       let data = {
         name: this.selectOptions.name,
         taste: this.selectOptions.taste,
         page: this.selectOptions.pageNumber - 1,
         size: this.selectOptions.pageSize
       }
-      // api.queryDish(qs.stringify(data)).then(res => {
-      // api.queryDish({params: data}).then(res => {
       api.queryDish(data).then(res => {
         if (res.data.result) {
           this.table.data = res.data.data.dishes
@@ -150,6 +149,8 @@ export default {
         }
       }).catch(err => {
         console.log(err)
+      }).finally(() => {
+
       })
     },
     reset () {
@@ -173,7 +174,7 @@ export default {
     },
     changePageNumber (n) {
       this.selectOptions.pageNumber = n
-      this.submit()
+      this.submit(false)
     },
     changePageSize (size) {
       this.selectOptions.pageSize = size

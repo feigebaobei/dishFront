@@ -71,7 +71,6 @@ export default {
         imageBig: '',
         imageMiddle: '',
         imageSmall: '',
-        imageTest: '',
         description: '',
         taste: 0,
         tasteList: config.tasteList,

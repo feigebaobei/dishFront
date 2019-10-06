@@ -1,9 +1,10 @@
 <template>
   <!-- 得到图片数据时，请使用this.$refs.xxx.dataImg -->
   <div class="showImg">
-    <div class="box" @click="trigger" v-if="!dataImg" :style="compStyle"></div>
-    <img :class="{preview: true, big: previewSize === 'big', middle: previewSize === 'middle', small: previewSize === 'small'}" :src="dataImg" alt="" v-else @click="trigger">
+    <div class="box" @click="trigger" v-show="!!!dataImg" :style="compStyle"></div>
+    <img crossOrigin="Anonymous" :class="{preview: true, big: previewSize === 'big', middle: previewSize === 'middle', small: previewSize === 'small'}" :src="dataImg" alt="" v-show="!!dataImg" @click="trigger" ref="imgBox">
     <input type="file" class="none" ref="input" @change="changeFile">
+    <!-- <canvas ref="can"></canvas> -->
   </div>
 </template>
 
@@ -46,6 +47,20 @@ export default {
   watch: {
     imgUrl (value) {
       this.dataImg = value
+      if (this.dataImg) {
+        let img = this.$refs.imgBox
+        img.onload = () => {
+          let canvas = document.createElement('canvas')
+          canvas.width = img.naturalWidth
+          canvas.height = img.naturalHeight
+          let context = canvas.getContext('2d')
+          context.drawImage(img, 0, 0, canvas.width, canvas.height)
+          canvas.toBlob((blob) => {
+            let file = new File([blob], String(Math.floor(Math.random() * 1000000)) + '.' + blob.type.split('/')[1], {type: blob.type, lastModified: new Date()})
+            this.$emit('getImg', file)
+          })
+        }
+      }
     }
   },
   // filters: {},
