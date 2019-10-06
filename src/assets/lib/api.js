@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
+import router from '@/router/index'
 
 let option = {
   baseURL: 'https://localhost:3443/',
@@ -36,6 +37,27 @@ let instance = (opt) => {
     return config
   }, error => {
     return Promise.reject(error)
+  })
+  inst.interceptors.response.use(response => {
+    return response
+  }, error => {
+    let err = null
+    switch (error.response.status) {
+      case 401:
+        err = {error: '', message: 'no login'}
+        router.push({
+          path: '/login'
+        })
+        break
+      case 403:
+        // err = {error: '', message: 'no login'}
+        err = error
+        break
+      default:
+        err = error
+        break
+    }
+    return Promise.reject(err)
   })
   return inst
 }
