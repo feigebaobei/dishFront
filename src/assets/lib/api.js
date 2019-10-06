@@ -89,8 +89,8 @@ const obj = {
     return instance(opt).get(`dish/${dishId}`)
   },
   // 删除指定的数据
-  deleteDish: (dishId) => {
-    return instance.delete(`dish/${dishId}`)
+  deleteDish: (dishId, opt = {}) => {
+    return instance(opt).delete(`dish/${dishId}`)
   },
   // test
   root: params => {

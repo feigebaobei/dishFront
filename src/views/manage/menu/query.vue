@@ -6,13 +6,16 @@
         <form-item label="菜名" prop="name">
           <Input v-model="selectOptions.name" placeholder="请输入"/>
         </form-item>
-        <!-- <form-item label="种类" prop="name">
-          <Input v-model="selectOptions.name" placeholder="请输入"/>
-        </form-item> -->
         <form-item label="口味" prop="taste">
           <Select v-model="selectOptions.taste" multiple>
             <Option v-for="item in selectOptions.tasteList" :value="item.value" :key="item.value">{{ item.label }}</Option>
           </Select>
+        </form-item>
+        <form-item label="是否删除" prop="delete">
+          <RadioGroup v-model="selectOptions.delete">
+            <Radio label="1">已删除</Radio>
+            <Radio label="0">未删除</Radio>
+          </RadioGroup>
         </form-item>
         <form-item>
           <Button type="primary" @click="submit(true)">查询</Button>
@@ -60,7 +63,7 @@
           <!-- 通过 Scoped slot 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据，用法参考 demo。 -->
           <template slot-scope="scope">
             <Button @click="edit(scope.row._id)" type="primary" size="small">编辑</Button>
-            <Button @click="deleteDish(scope.row._id)" type="primary" size="small">删除</Button>
+            <Button @click="opDelete(scope.row._id)" type="primary" size="small">删除</Button>
           </template>
         </table-column>
       </Table>
@@ -73,7 +76,7 @@
 <script>
 // import { Card, Form, FormItem, Input, Select, Option, Button, Table } from 'iview'
 // iview的table不能正确渲染button.所以使用element的table
-import { Card, Form, FormItem, Input, Select, Option, Page } from 'iview'
+import { Card, Form, FormItem, Input, Select, Option, Page, RadioGroup, Radio } from 'iview'
 import { Button, Table, TableColumn } from 'element-ui'
 import api from '@/assets/lib/api'
 import config from '@/assets/lib/config'
@@ -84,6 +87,7 @@ export default {
       selectOptions: {
         name: '',
         taste: [],
+        delete: '',
         tasteList: config.tasteList,
         pageNumber: 1,
         pageSize: 10,
@@ -119,6 +123,8 @@ export default {
     // Table,
     // buttonVue: Button,
     Page,
+    RadioGroup,
+    Radio,
     // 下面是使用element的组件
     Button,
     Table,
@@ -137,8 +143,12 @@ export default {
       let data = {
         name: this.selectOptions.name,
         taste: this.selectOptions.taste,
+        // delete: this.selectOptions.delete === '1',
         page: this.selectOptions.pageNumber - 1,
         size: this.selectOptions.pageSize
+      }
+      if (this.selectOptions.delete !== '') {
+        data.delete = this.selectOptions.delete === '1'
       }
       api.queryDish(data).then(res => {
         if (res.data.result) {
@@ -164,12 +174,34 @@ export default {
         }
       })
     },
+    opDelete (id) {
+      this.$confirm('是否删除', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deleteDish(id)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
     deleteDish (id) {
-      console.log(id)
       api.deleteDish(id).then(res => {
-        console.log(res)
+        this.$message({
+          type: 'success',
+          message: '删除成功'
+        })
+        // console.log(res)
+        this.submit(true)
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
+        this.$message({
+          type: 'success',
+          message: '删除失败'
+        })
       })
     },
     changePageNumber (n) {

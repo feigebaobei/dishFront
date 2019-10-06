@@ -6,6 +6,12 @@ import router from './router'
 import Router from 'vue-router'
 import 'iview/dist/styles/iview.css'
 import 'element-ui/lib/theme-chalk/index.css'
+import {
+  Loading,
+  MessageBox,
+  Message,
+  Nofification
+} from 'element-ui'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push (location) {
@@ -13,6 +19,14 @@ Router.prototype.push = function push (location) {
 }
 
 Vue.config.productionTip = false
+
+Vue.prototype.$loading = Loading.service
+Vue.prototype.$msgbox = MessageBox
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$notify = Nofification
+Vue.prototype.$message = Message
 
 /* eslint-disable no-new */
 new Vue({

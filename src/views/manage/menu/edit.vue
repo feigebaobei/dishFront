@@ -174,6 +174,7 @@ export default {
           fd.append('description', this.dishOptions.description)
           fd.append('price', this.dishOptions.price)
           fd.append('taste', this.dishOptions.taste)
+          fd.append('delete', this.dishOptions.delete === '1')
           fd.append('compose', this.dishOptions.compose)
           fd.append('status', this.dishOptions.status)
           fd.append('category', this.dishOptions.category)
