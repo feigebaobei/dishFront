@@ -63,7 +63,7 @@
           <!-- 通过 Scoped slot 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据，用法参考 demo。 -->
           <template slot-scope="scope">
             <Button @click="edit(scope.row._id)" type="primary" size="small">编辑</Button>
-            <Button @click="opDelete(scope.row._id)" type="primary" size="small">删除</Button>
+            <Button v-if="!scope.row.delete" @click="opDelete(scope.row._id)" type="primary" size="small">删除</Button>
           </template>
         </table-column>
       </Table>
