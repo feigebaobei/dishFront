@@ -19,6 +19,12 @@ const consumer = [
         }
       },
       {
+        path: 'shoppingCar',
+        component: resolve => {
+          require(['@/views/consumer/shoppingCar'], resolve)
+        }
+      },
+      {
         path: 'dishDetail',
         component: resolve => {
           require(['@/views/consumer/dishDetail'], resolve)
