@@ -197,7 +197,7 @@ export default {
         // console.log(res)
         this.submit(true)
       }).catch(err => {
-        // console.log(err)
+        console.log(err)
         this.$message({
           type: 'success',
           message: '删除失败'
