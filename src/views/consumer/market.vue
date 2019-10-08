@@ -40,7 +40,7 @@
         </div>
       </Form>
       <!-- 菜品列表 -->
-      <menu-item v-for="(item, index) in dataDish" :key="index" :id="item.id" :name="item.name" :imgUrl="item.imgUrl" :price="item.price" :number="item.number" :tip="item.compose" @triggerAll="gotoDetail(item.id)" @minus="minus(item.id)" @add="add"></menu-item>
+      <menu-item v-for="(item, index) in dataDish" :key="index" :id="item.id" :name="item.name" :imgUrl="item.imgUrl" :price="`${opPrice(item.price)}`" :number="item.number" :tip="item.compose" @triggerAll="gotoDetail(item.id)" @minus="minus(item.id)" @add="add"></menu-item>
     </div>
     <!-- 已选列表 -->
     <infinite-loading @infinite="getDish" ref="infiniteLoading">
@@ -59,9 +59,13 @@
           <img :src="dataSCBox.scCloseImgUrl" alt="" class="close" @click="closeSC">
         </header>
         <article>
-          <menu-item-small v-for="(item, index) in compSelDataDish" :key="index" :id="item.id" :imgUrl="item.imgUrl" :name="item.name" :price="item.price" :number="item.number" @add="addSC" @minus="minusSC"></menu-item-small>
+          <menu-item-small v-for="(item, index) in compSelDataDish" :key="index" :id="item.id" :imgUrl="item.imgUrl" :name="item.name" :price="`${opPrice(item.price)}`" :number="item.number" @add="addSC" @minus="minusSC"></menu-item-small>
         </article>
         <footer>
+          <p>
+            <span>共计：</span>
+            <span v-html="`￥${compAmount}`"></span>
+          </p>
           <Button type="default" class="clear" @click="clearSC">清空</Button>
           <Button type="primary" @click="submitOrder">去支付</Button>
         </footer>
@@ -151,6 +155,10 @@ export default {
     },
     compSelDataDish () {
       return this.dataDish.filter(item => item.number > 0)
+    },
+    compAmount () {
+      let n =this.compSelDataDish.reduce((r, c) => r += c.price * c.number, 0)
+      return (n / 100).toFixed(2)
     }
   },
   components: {
@@ -191,7 +199,8 @@ export default {
                 id: c._id,
                 name: c.name,
                 imgUrl: `https://localhost:3443${c.imageMiddle.replace(/public(?=\/images)/, '')}`,
-                price: `${this.OpPrice(c.price)}`,
+                // price: `${this.opPrice(c.price)}`,
+                price: c.price,
                 compose: c.compose,
                 // selected: false, // 是否选购
                 number: 0 // 购买数量
@@ -211,7 +220,7 @@ export default {
         console.log(err)
       })
     },
-    OpPrice (price) {
+    opPrice (price) {
       let i = Math.trunc(price / 100)
       let f = price - i * 100
       f = f < 10 ? `0${f}` : f
@@ -438,6 +447,10 @@ export default {
           flex-shrink: 0
           padding: 0 10px
           margin-bottom: 8px
+
+          p
+            margin: 8px
+            font-size: 16px
 
           .clear
             margin-right: 5px
