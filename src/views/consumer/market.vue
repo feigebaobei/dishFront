@@ -157,7 +157,10 @@ export default {
       return this.dataDish.filter(item => item.number > 0)
     },
     compAmount () {
-      let n =this.compSelDataDish.reduce((r, c) => r += c.price * c.number, 0)
+      let n = this.compSelDataDish.reduce((r, c) => {
+        r += c.price * c.number
+        return r
+      }, 0)
       return (n / 100).toFixed(2)
     }
   },
@@ -251,11 +254,11 @@ export default {
       }
     },
     gotoDetail (id) {
-      console.log(id)
+      // console.log(id)
       this.$router.push({
         path: '/consumer/dishDetail',
-        params: {
-          id: id
+        query: {
+          dishId: id
         }
       })
     },
@@ -320,6 +323,13 @@ export default {
       })
     },
     submitOrder () {
+      if (!this.compSelDataDish.length) {
+        this.$message({
+          type: 'error',
+          message: '请选择商品'
+        })
+        return
+      }
       let order = this.compSelDataDish.reduce((r, c) => {
         let o = {
           id: c.id,
@@ -333,6 +343,7 @@ export default {
       }).then(res => {
         this.gotoPay(true)
       }).catch(err => {
+        console.log(err)
         this.gotoPay(false)
       })
     },

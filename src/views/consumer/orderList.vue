@@ -32,5 +32,7 @@ export default {
 <style scoped="" lang="stylus">
 @import '~@/assets/stylus/basic.styl'
   .orderList
-    // color: #333
+    max-width: 1000px
+    margin: 0 auto
+
 </style>

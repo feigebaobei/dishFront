@@ -37,7 +37,7 @@ export default {
   // filters: {},
   computed: {
     compResult () {
-      return this.$route.query.result === 'true'
+      return this.$route.query.result // === 'true'
     }
   },
   components: {
@@ -59,7 +59,6 @@ export default {
   },
   created () {},
   mounted () {
-    console.log(this.$route.query.result)
     // this.init()
   }
 }

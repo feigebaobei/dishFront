@@ -39,6 +39,9 @@ let instance = (opt) => {
     return Promise.reject(error)
   })
   inst.interceptors.response.use(response => {
+    if (!response.data.result) {
+      throw new Error('服务器返回的数据格式不正确或服务器出错')
+    }
     return response
   }, error => {
     let err = null
