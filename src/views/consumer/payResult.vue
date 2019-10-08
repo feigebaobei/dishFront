@@ -1,5 +1,5 @@
 <template>
-  <div class="payResult"></div>
+  <div class="payResult">{{dataResult}}</div>
 </template>
 
 <script>
@@ -9,6 +9,7 @@ export default {
   // name: '',
   data () {
     return {
+      dataResult: this.$route.query.result
     }
   },
   // watch: {},

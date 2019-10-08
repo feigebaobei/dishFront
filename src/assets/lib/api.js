@@ -6,7 +6,7 @@ let option = {
   baseURL: 'https://localhost:3443/',
   timeout: 5000,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+    // 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
   },
   withCredentials: true
 }
@@ -69,10 +69,12 @@ const obj = {
   login: (params, opt = {}) => {
     return instance(opt).post('users/login', params)
   },
+  // 添加菜品
   addDish: (params, opt = {}) => {
     // return instance.post('dish', params)
     return instance(opt).post('dish', params)
   },
+  // 按条件查询菜品
   queryDish: (params, opt = {}) => {
     // console.log(params, opt)
     let qsString = qs.stringify(params)
@@ -101,6 +103,10 @@ const obj = {
   },
   dishTest: params => {
     return instance.post('dish/test', params)
+  },
+  // 订单部分
+  payOrder: (params, opt = {}) => {
+    return instance(opt).post('order', params)
   }
 }
 

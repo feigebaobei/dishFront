@@ -13,7 +13,7 @@ export default {
   },
   // watch: {},
   // filters: {},
-  // computed {},
+  // computed: {},
   components: {
     // comp
   },
