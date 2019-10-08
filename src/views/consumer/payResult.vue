@@ -1,7 +1,6 @@
 <template>
   <div class="payResult">
-    <!-- {{dataResult}} -->
-    <div class="success" v-if="dataResult">
+    <div class="success" v-if="compResult">
       <img :src="dataImgSuccess" alt="">
       <p>支付成功</p>
       <div class="opBox">
@@ -30,13 +29,17 @@ export default {
   data () {
     return {
       dataImgSuccess: picMap.pic.success.x1,
-      dataImgFail: picMap.pic.fail.x1,
-      dataResult: this.$route.query.result === 'true'
+      dataImgFail: picMap.pic.fail.x1
+      // dataResult: this.$route.query.result === 'true'
     }
   },
   // watch: {},
   // filters: {},
-  // computed {},
+  computed: {
+    compResult () {
+      return this.$route.query.result === 'true'
+    }
+  },
   components: {
     // comp
     Button
@@ -56,6 +59,7 @@ export default {
   },
   created () {},
   mounted () {
+    console.log(this.$route.query.result)
     // this.init()
   }
 }
