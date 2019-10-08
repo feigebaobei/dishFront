@@ -1,5 +1,7 @@
 <template>
   <div class="dishDetail">
+    <!-- 导航 -->
+    <head-nav :name="dataUserInfo.name" :loginStatus="!!dataUserInfo.name"></head-nav>
     <!-- banner -->
     <div class="bannerBox" :style="compBannerImg">
     </div>
@@ -56,12 +58,16 @@
 // import picMap from '@/assets/lib/picMap'
 import api from '@/assets/lib/api'
 import commentList from '@/components/common/commentList.vue'
+import headNav from '@/components/headNav.vue'
 export default {
   // props: {},
   // name: '',
   data () {
     return {
       dishId: this.$route.query.dishId || '',
+      dataUserInfo: {
+        name: '54545'
+      },
       banner: {
         imgUrl: '',
         description: '',
@@ -141,6 +147,7 @@ export default {
     }
   },
   components: {
+    headNav,
     commentList
   },
   methods: {
@@ -169,19 +176,22 @@ export default {
 <style scoped="" lang="stylus">
 @import '~@/assets/stylus/basic.styl'
   .dishDetail
-    max-width: 1000px
-    margin: 0 auto
 
     .bannerBox
       background-position: center
       background-repeat: no-repeat
       background-size: cover
       height: 420px
+      max-width: 1000px
+      margin: 0 auto
+      margin-top: 5px
 
     .descriptionBox
     .composeBox
     .commentList
     .page
+      max-width: 1000px
+      margin: 0 auto
       margin-top: 5px
 
       .title
