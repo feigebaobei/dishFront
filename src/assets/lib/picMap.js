@@ -13,6 +13,12 @@ let icon = {
   }
 }
 let pic = {
+  success: {
+    x1: require('../images/success.png')
+  },
+  fail: {
+    x1: require('../images/fail.png')
+  },
   default: {
     x1: require('../images/dishEmptySquare.jpg')
   }
