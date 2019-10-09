@@ -110,6 +110,10 @@ const obj = {
   // 订单部分
   payOrder: (params, opt = {}) => {
     return instance(opt).post('order', params)
+  },
+  getHistoryOrder: (params, opt = {}) => {
+    console.log(params)
+    return instance(opt).get(`order?${qs.stringify(params)}`)
   }
 }
 

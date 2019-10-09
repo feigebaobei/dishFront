@@ -3,7 +3,7 @@
     <div class="hnLeft">
       <span v-html="name"></span>
       <span>购物车</span>
-      <span>历史订单</span>
+      <span @click="gotoHistoryOrder">历史订单</span>
     </div>
     <div class="hnRight">
       <span v-html="compLogin"></span>
@@ -41,6 +41,13 @@ export default {
   },
   methods: {
     // init () {}
+    gotoHistoryOrder () {
+      this.$router.push({
+        path: '/consumer/orderList',
+        query: {
+        }
+      })
+    }
   },
   created () {},
   mounted () {
@@ -65,11 +72,17 @@ export default {
 
       span
         margin-right: 15px
+        cursor: pointer
+        user-select: none
 
     .hnRight
       flex-grow: 1
       flex-shrink: 1
       flex-basis: 20%
       text-align: right
+
+      span
+        cursor: pointer
+        user-select: none
 
 </style>
