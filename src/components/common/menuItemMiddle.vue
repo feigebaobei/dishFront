@@ -38,7 +38,7 @@ export default {
     amount: {
       type: [String, Number],
       default: 0
-    },
+    }
   },
   // name: '',
   data () {
@@ -84,7 +84,7 @@ export default {
       flex-grow: 0
       flex-shrink: 0
       margin-right: 10px
-    
+
     .second
       flex-basis: 70%
       margin-right: 10px

@@ -49,7 +49,6 @@ export default {
     // init () {}
     gotoComment (id) {
       this.$emit('gotoComment', id)
-      // this.$router.push({})
     }
   },
   created () {},

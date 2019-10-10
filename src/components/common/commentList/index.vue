@@ -1,6 +1,6 @@
 <template>
   <div class="commentList">
-    <Card class="item" v-for="(item, index) in data" :key="index">
+    <!-- <Card class="item" v-for="(item, index) in data" :key="index">
       <article :class="{extend: dataExtend}" @click="trigger">
         <p v-html="item.comment"></p>
       </article>
@@ -17,13 +17,15 @@
           <span v-html="item.updatedAt"></span>
         </p>
       </footer>
-    </Card>
+    </Card> -->
+    <comment-card v-for="(item, index) in data" :key="index"></comment-card>
   </div>
 </template>
 
 <script>
 // import comp from '@/components/common/comp.vue'
-import { Card } from 'iview'
+// import { Card } from 'iview'
+import commentCard from './commentCard.vue'
 export default {
   props: {
     data: {
@@ -60,12 +62,11 @@ export default {
   // filters: {},
   // computed: {},
   components: {
-    Card
+    commentCard
   },
   methods: {
     // init () {}
     trigger () {
-      console.log(234)
       this.dataExtend = !this.dataExtend
     }
   },
@@ -81,24 +82,5 @@ export default {
   .commentList
     // color: #333
     user-select: none
-
-    .item
-      margin-bottom: 5px
-
-      article
-        height: 120px
-        overflow: hidden
-
-      .extend
-        min-height: 120px
-        height: auto
-        overflow: auto
-
-      footer
-        display: flex
-        flex-wrap: wrap
-        hr
-          flex-basis: 100%
-          margin: 5px 0
 
 </style>

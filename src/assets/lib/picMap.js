@@ -10,6 +10,12 @@ let icon = {
   },
   close: {
     x1: require('../images/close.png')
+  },
+  start: {
+    x1: require('../images/start.png')
+  },
+  startGrey: {
+    x1: require('../images/startGrey.png')
   }
 }
 let pic = {

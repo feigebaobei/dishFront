@@ -41,6 +41,12 @@ const consumer = [
         component: resolve => {
           require(['@/views/consumer/orderList'], resolve)
         }
+      },
+      {
+        path: 'comment',
+        component: resolve => {
+          require(['@/views/consumer/comment'], resolve)
+        }
       }
     ]
   }

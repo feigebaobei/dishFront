@@ -72,6 +72,12 @@ export default {
     },
     gotoComment (id) {
       console.log(id)
+      this.$router.push({
+        path: '/consumer/comment',
+        query: {
+          dishId: id
+        }
+      })
     }
   },
   created () {},

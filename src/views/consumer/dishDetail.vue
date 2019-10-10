@@ -55,9 +55,8 @@
 
 <script>
 // import comp from '@/components/common/comp.vue'
-// import picMap from '@/assets/lib/picMap'
 import api from '@/assets/lib/api'
-import commentList from '@/components/common/commentList.vue'
+import commentList from '@/components/common/commentList/index.vue'
 import headNav from '@/components/headNav.vue'
 export default {
   // props: {},

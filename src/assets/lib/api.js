@@ -112,8 +112,22 @@ const obj = {
     return instance(opt).post('order', params)
   },
   getHistoryOrder: (params, opt = {}) => {
-    console.log(params)
     return instance(opt).get(`order?${qs.stringify(params)}`)
+  },
+  // 评论部分
+  getCommentByDishId: (dishId, params, opt = {}) => {
+    return instance(opt).get(`dish/${dishId}/comment?${qs.stringify(params)}`)
+  },
+  // // 查询当前用户的评论
+  // getCommentSelf: (dishId, params, opt = {}) => {
+  //   return instance(opt).get(`dish/${dishId}/commentCurrentUser?${qs.stringify(params)}`)
+  // },
+  // // 查询非当前用户的评论
+  // getCommentOther: (dishId, params, opt = {}) => {
+  //   return instance(opt).get(`dish/${dishId}/commentOtherUser?${qs.stringify(params)}`)
+  // },
+  addComment: (dishId, params, opt = {}) => {
+    return instance(opt).post(`dish/${dishId}/comment`, params)
   }
 }
 
