@@ -24,7 +24,7 @@
       </article>
     </section>
     <!-- comment -->
-    <section class="comment">
+    <section class="comment" v-if="dataComment.myComments.length">
       <header class="title">
         <h1>我的评论</h1>
       </header>
@@ -62,7 +62,7 @@
       </article>
     </section>
     <!-- comment list -->
-    <section class="commentList">
+    <section class="commentList" v-if="dataComment.otherComments.length">
       <header class="title">
         <h1>他人评论</h1>
       </header>
@@ -394,6 +394,8 @@ export default {
         .commentListBox
           margin-right: 10px
           flex-basis: 40%
+          max-height: 700px
+          overflow: auto
 
           &:last-child
             margin-right: 0
