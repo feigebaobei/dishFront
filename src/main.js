@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import statusManitor from './vuex/index.js'
 import Router from 'vue-router'
 import 'iview/dist/styles/iview.css'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -32,6 +33,7 @@ Vue.prototype.$message = Message
 new Vue({
   el: '#app',
   router,
+  store: statusManitor,
   components: { App },
   template: '<App/>'
 })

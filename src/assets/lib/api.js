@@ -1,11 +1,14 @@
 import axios from 'axios'
 import qs from 'qs'
 import router from '@/router/index'
+import store from '@/vuex/index.js'
 
 let option = {
   baseURL: 'https://localhost:3443/',
   timeout: 5000,
   headers: {
+    // Authorization: `bearer ${store.state.user.token}`
+    // Authorization: `bearer ${store.getters.getToken()}`
     // 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
   },
   withCredentials: true
@@ -32,8 +35,10 @@ let option = {
 // })
 
 let instance = (opt) => {
-  let inst = axios.create(Object.assign(option, opt))
+  let inst = axios.create(Object.assign({}, option, opt))
   inst.interceptors.request.use(config => { // config是axios的配置项
+    config.headers.Authorization = `bearer ${store.getters.getToken}`
+    // 因生命周期的原因需要在请求前添加Authorization
     return config
   }, error => {
     return Promise.reject(error)
@@ -66,7 +71,7 @@ let instance = (opt) => {
 }
 
 const obj = {
-  isLogin: (opt) => {
+  isLogin: (opt = {}) => {
     return instance(opt).post('users/isLogin')
   },
   login: (params, opt = {}) => {
@@ -109,6 +114,7 @@ const obj = {
   },
   // 订单部分
   payOrder: (params, opt = {}) => {
+    // console.log
     return instance(opt).post('order', params)
   },
   getHistoryOrder: (params, opt = {}) => {
