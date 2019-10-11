@@ -18,12 +18,13 @@
 <script>
 import { Form, FormItem, Input, Button } from 'iview'
 import api from '@/assets/lib/api'
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
       url: this.$route.query.url,
       userInfo: {
-        username: 'first',
+        username: 'second',
         password: 'password'
       },
       ruleValidate: {
@@ -47,6 +48,7 @@ export default {
   },
   methods: {
     // init () {}
+    ...mapActions(['updateToken', 'updateUser']),
     submit () {
       // api.login({
       //   username: this.userInfo.username,
@@ -54,6 +56,10 @@ export default {
       // })
       api.login(`username=${this.userInfo.username}&password=${this.userInfo.password}`)
         .then(res => {
+          let token = res.data.data.token
+          this.updateToken({token: token})
+          this.updateUser(res.data.data.user)
+          // console.log('token', this.$store.state.user.token)
           if (this.url) {
             let urlDecode = decodeURIComponent(this.url)
             if (/^http/.test(urlDecode)) {

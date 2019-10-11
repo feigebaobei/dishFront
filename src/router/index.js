@@ -27,6 +27,13 @@ export default new Router({
         require(['@/views/login'], resolve)
       }
     },
+    {
+      path: '/test',
+      name: 'test',
+      component: (resolve) => {
+        require(['@/views/test'], resolve)
+      }
+    },
     ...consumer,
     ...manage
   ]

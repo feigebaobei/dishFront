@@ -1,7 +1,8 @@
 <template>
   <div class="comment">
     <!-- 导航 -->
-    <head-nav :name="dataUserInfo.name" :loginStatus="!!dataUserInfo.name"></head-nav>
+    <!-- <head-nav :name="dataUserInfo.name" :loginStatus="!!dataUserInfo.name"></head-nav> -->
+    <head-nav></head-nav>
     <!-- banner -->
     <div class="bannerBox" :style="compBannerImg">
     </div>
@@ -109,9 +110,9 @@ export default {
   data () {
     return {
       dishId: this.$route.query.dishId || '',
-      dataUserInfo: {
-        name: '54545'
-      },
+      // dataUserInfo: {
+      //   name: '54545'
+      // },
       banner: {
         imgUrl: '',
         description: '',
@@ -213,7 +214,7 @@ export default {
       return this.dataComment.otherComments.filter((item) => {
         return item.videoRating + item.odourRating + item.tasteRating <= 9
       })
-    },
+    }
   },
   components: {
     headNav,
@@ -277,7 +278,6 @@ export default {
           r.push(c)
           return r
         }, [])
-
       }).catch(err => {
         console.log(err)
       })

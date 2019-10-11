@@ -2,7 +2,8 @@
   <div class="orderList">
     <!-- <p>orderList</p> -->
     <!-- 导航 -->
-    <head-nav :name="dataUserInfo.name" :loginStatus="!!dataUserInfo.name"></head-nav>
+    <!-- <head-nav :name="dataUserInfo.name" :loginStatus="!!dataUserInfo.name"></head-nav> -->
+    <head-nav></head-nav>
     <!-- 订单列表 -->
     <div class="orderBox">
       <order-item class="item" v-for="(item, index) in dataOrderList" :key="index" :data="item" @gotoComment="gotoComment"></order-item>
@@ -26,9 +27,9 @@ export default {
   // name: '',
   data () {
     return {
-      dataUserInfo: {
-        name: '54545'
-      },
+      // dataUserInfo: {
+      //   name: '54545'
+      // },
       dataSelOptions: {
         page: 0,
         size: 10
@@ -56,10 +57,11 @@ export default {
         console.log(res)
         let data = res.data.data
         if (data.length) {
+          this.dataOrderList = this.dataOrderList.concat(data)
           if (data.length < this.dataSelOptions.size) {
             $state.complete()
           } else {
-            this.dataOrderList = this.dataOrderList.concat(data)
+            // this.dataOrderList = this.dataOrderList.concat(data)
             this.dataSelOptions.page++
             $state.loaded()
           }
