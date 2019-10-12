@@ -53,7 +53,7 @@ export default {
       })
     },
     trigger () {
-      console.log(this.getUserName)
+      // console.log(this.getUserName)
       // this.updateToken({token: ''})
       if (this.getUserName) { // 点击登出
         this.updateToken({token: ''})

@@ -14,6 +14,7 @@
 <script>
 // import comp from '@/components/common/comp.vue'
 import api from '@/assets/lib/api'
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -21,7 +22,9 @@ export default {
   },
   // watch: {},
   // filters: {},
-  // computed {},
+  computed: {
+    ...mapGetters(['getToken', 'getUserName'])
+  },
   components: {
     // comp
   },
@@ -33,22 +36,20 @@ export default {
       // 否 去登录页面
       if (!this.$refs.manage.classList.value.split(' ').includes('wait')) {
         this.$refs.manage.classList.add('wait')
-        api.isLogin().then(res => {
+        if (!!this.getToken && !!this.getUserName) {
           this.$refs.manage.classList.remove('wait')
-          // console.log(res)
           this.$router.push({
             path: '/' + path
           })
-        }).catch(err => {
+        } else {
           this.$refs.manage.classList.remove('wait')
-          console.log(err)
           this.$router.push({
             path: '/login',
             query: {
               url: this.opUrl(`/${path}`)
             }
           })
-        })
+        }
       }
     },
     opUrl (str) {
