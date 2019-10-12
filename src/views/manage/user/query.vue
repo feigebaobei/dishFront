@@ -16,7 +16,7 @@
         <table-column label="用户名" prop="username"></table-column>
         <table-column label="firstname" prop="firstname"></table-column>
         <table-column label="lastname" prop="lastname"></table-column>
-        <table-column label="是否是管理员" prop="admin"></table-column>
+        <table-column label="管理员" prop="admin"></table-column>
         <table-column label="操作" fixed="right" min-width="150px">
           <template slot-scope="scope">
             <Button type="primary" @click="editFn(scope.row._id)">编辑</Button>
@@ -75,7 +75,7 @@ export default {
       if (bool) {
         this.dataSelOptions.pageNumber = 1
       }
-      api.queryUser({
+      api.queryUserAll({
         username: this.dataSelOptions.username,
         page: this.dataSelOptions.pageNumber - 1,
         size: this.dataSelOptions.pageSize

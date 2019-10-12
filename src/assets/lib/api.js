@@ -143,8 +143,14 @@ const obj = {
     return instance(opt).delete(`dish/${dishId}/comment/${commentId}`)
   },
   // 用户部分
-  queryUser: (params, opt = {}) => {
+  queryUserAll: (params, opt = {}) => {
     return instance(opt).get(`users?${qs.stringify(params)}`)
+  },
+  queryUser: (userId = '', opt = {}) => {
+    return instance(opt).get(`users/${userId}`)
+  },
+  editUser: (userId = '', params, opt = {}) => {
+    return instance(opt).put(`users/${userId}`, params)
   },
   deleteUser: (userId, opt = {}) => {
     return instance(opt).delete(`users/${userId}`)
