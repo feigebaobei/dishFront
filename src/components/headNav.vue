@@ -2,8 +2,8 @@
   <div class="headNav">
     <div class="hnLeft">
       <span v-html="getUserName"></span>
-      <span v-if="!!getUserName">购物车</span>
-      <span v-if="!!getUserName" @click="gotoHistoryOrder">历史订单</span>
+      <span v-if="!!getUserName && mPosition()">购物车</span>
+      <span v-if="!!getUserName && mPosition()" @click="gotoHistoryOrder">历史订单</span>
       <span @click="gotoIndex">首页</span>
     </div>
     <div class="hnRight">
@@ -72,6 +72,9 @@ export default {
           path: '/login'
         })
       }
+    },
+    mPosition () { //
+      return /^\/consumer\/?/.test(this.$route.path)
     }
   },
   created () {},
