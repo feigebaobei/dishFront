@@ -4,6 +4,7 @@
       <span v-html="getUserName"></span>
       <span v-if="!!getUserName">购物车</span>
       <span v-if="!!getUserName" @click="gotoHistoryOrder">历史订单</span>
+      <span @click="gotoIndex">首页</span>
     </div>
     <div class="hnRight">
       <span v-html="compLogin" @click="trigger"></span>
@@ -50,6 +51,11 @@ export default {
         path: '/consumer/orderList',
         query: {
         }
+      })
+    },
+    gotoIndex () {
+      this.$router.push({
+        path: '/index'
       })
     },
     trigger () {

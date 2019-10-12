@@ -13,7 +13,7 @@
 
 <script>
 // import comp from '@/components/common/comp.vue'
-import api from '@/assets/lib/api'
+// import api from '@/assets/lib/api'
 import { mapGetters } from 'vuex'
 export default {
   data () {
@@ -36,6 +36,9 @@ export default {
       // 否 去登录页面
       if (!this.$refs.manage.classList.value.split(' ').includes('wait')) {
         this.$refs.manage.classList.add('wait')
+        // console.log(this.getToken, this.getUserName)
+        // console.log(!!this.getToken && !!this.getUserName)
+        // return
         if (!!this.getToken && !!this.getUserName) {
           this.$refs.manage.classList.remove('wait')
           this.$router.push({

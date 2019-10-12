@@ -59,7 +59,7 @@ export default {
           let token = res.data.data.token
           this.updateToken({token: token})
           this.updateUser(res.data.data.user)
-          console.log('token', this.$store.state.user.token)
+          // console.log('token', this.$store.state.user.token)
           if (this.url) {
             let urlDecode = decodeURIComponent(this.url)
             if (/^http/.test(urlDecode)) {

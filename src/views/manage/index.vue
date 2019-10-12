@@ -1,33 +1,39 @@
 <template>
   <div class="manage">
-    <Sider class="menu">
-      <Menu :active-name="activeName" theme="dark" width="auto" :open-names="openNames" @on-select="slMenu">
-        <Submenu name="1">
-          <template slot="title">
-            <Icon type="ios-navigate"></Icon>用户管理
-          </template>
-          <menu-item name="manage/user/create">新建用户</menu-item>
-          <menu-item name="manage/user/query">查询用户</menu-item>
-        </Submenu>
-        <Submenu name="2">
-          <template slot="title">
-            <Icon type="ios-keypad"></Icon>菜品管理
-          </template>
-          <menu-item name="/manage/menu/add">新建菜品</menu-item>
-          <menu-item name="/manage/menu/query" @on-select="gotoPage('/menu/query')">查询菜品</menu-item>
-        </Submenu>
-      </Menu>
-    </Sider>
-    <Layout class="contBox">
-      <!-- <Header></Header> -->
-      <Content class="cont">
-        <!-- <Breadcrumb class="breadCrumb">
-          <BreadcrumbItem>Home</BreadcrumbItem>
-          <BreadcrumbItem>Components</BreadcrumbItem>
-          <BreadcrumbItem>Layout</BreadcrumbItem>
-        </Breadcrumb> -->
-        <router-view></router-view>
-      </Content>
+    <Layout>
+      <!-- <Header -->
+      <head-nav></head-nav>
+      <Layout>
+        <Sider class="menu">
+          <Menu :active-name="activeName" theme="dark" width="auto" :open-names="openNames" @on-select="slMenu">
+            <Submenu name="1">
+              <template slot="title">
+                <Icon type="ios-navigate"></Icon>用户管理
+              </template>
+              <menu-item name="/manage/user/add">新建用户</menu-item>
+              <menu-item name="/manage/user/query">查询用户</menu-item>
+            </Submenu>
+            <Submenu name="2">
+              <template slot="title">
+                <Icon type="ios-keypad"></Icon>菜品管理
+              </template>
+              <menu-item name="/manage/menu/add">新建菜品</menu-item>
+              <menu-item name="/manage/menu/query" @on-select="gotoPage('/menu/query')">查询菜品</menu-item>
+            </Submenu>
+          </Menu>
+        </Sider>
+        <Layout class="contBox">
+          <!-- <Header></Header> -->
+          <Content class="cont">
+            <!-- <Breadcrumb class="breadCrumb">
+              <BreadcrumbItem>Home</BreadcrumbItem>
+              <BreadcrumbItem>Components</BreadcrumbItem>
+              <BreadcrumbItem>Layout</BreadcrumbItem>
+            </Breadcrumb> -->
+            <router-view></router-view>
+          </Content>
+        </Layout>
+      </Layout>
     </Layout>
   </div>
 </template>
@@ -35,6 +41,7 @@
 <script>
 import linkedMenu from '@/components/common/linkedMenu/index'
 import item from '@/components/common/linkedMenu/item'
+import headNav from '@/components/headNav'
 import api from '@/assets/lib/api'
 import { Layout, Sider, Menu, Submenu, Icon, MenuItem, Content, Breadcrumb, BreadcrumbItem } from 'iview'
 export default {
@@ -60,7 +67,8 @@ export default {
     MenuItem,
     Content,
     Breadcrumb,
-    BreadcrumbItem
+    BreadcrumbItem,
+    headNav
   },
   methods: {
     init () {

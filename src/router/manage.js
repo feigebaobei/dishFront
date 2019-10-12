@@ -18,9 +18,24 @@ const manage = [
           require(['@/views/manage/user'], resolve)
         },
         children: [
-          // {
-          //   path: ''
-          // }
+          {
+            path: 'query',
+            component: resolve => {
+              require(['@/views/manage/user/query'], resolve)
+            }
+          },
+          {
+            path: 'edit',
+            component: resolve => {
+              require(['@/views/manage/user/edit'], resolve)
+            }
+          },
+          {
+            path: 'add',
+            component: resolve => {
+              require(['@/views/manage/user/add'], resolve)
+            }
+          }
         ]
       },
       {
@@ -57,6 +72,13 @@ const manage = [
       }
     ]
   }
+  // {
+  //   path: '/user',
+  //   component: (resolve) => {
+  //     require(['@/views/user/index'], resolve)
+  //   },
+  //   children: []
+  // }
 ]
 
 export default manage
