@@ -1,6 +1,6 @@
 <template>
   <div class="add">
-    <p>add</p>
+    <p>管理系统暂时不支持添加用户</p>
   </div>
 </template>
 
