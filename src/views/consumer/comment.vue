@@ -256,6 +256,7 @@ export default {
                 }
               ).then(res => {
                 // 更新我的评论
+                this.dataComment.myComments = []
                 this.getCommentSelf()
                 // 清空当前评论
                 this.resetForm()
@@ -271,6 +272,11 @@ export default {
                 content: this.dataComment.content
               }).then(res => {
                 console.log(res)
+                // 更新我的评论
+                this.dataComment.myComments = []
+                this.getCommentSelf()
+                // 清空当前评论
+                this.resetForm()                
               }).catch(err => {
                 console.log(err)
               })

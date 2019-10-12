@@ -31,13 +31,17 @@
           <span v-html="updatedAt"></span>
         </p>
       </footer>
+      <div class="opBox" v-if="hasOperateBox">
+        <Button type="primary" @click="triggerEdit">编辑</Button>
+        <Button type="primary" @click="triggerDelete">删除</Button>
+      </div>
     </Card>
   </div>
 </template>
 
 <script>
 // import comp from '@/components/common/comp.vue'
-import { Card } from 'iview'
+import { Card, Button } from 'iview'
 import gradeStart from '@/components/common/gradeStart/index.vue'
 export default {
   props: {
@@ -68,6 +72,10 @@ export default {
     updatedAt: {
       type: String,
       default: ''
+    },
+    hasOperateBox: {
+      type: Boolean,
+      default: false
     }
   },
   // name: '',
@@ -84,12 +92,23 @@ export default {
   // computed: {},
   components: {
     Card,
-    gradeStart
+    gradeStart,
+    Button
   },
   methods: {
     // init () {}
     trigger () {
       this.dataExtend = !this.dataExtend
+    },
+    triggerEdit () {
+      if (this.hasOperateBox) {
+        this.$emit('edit')
+      }
+    },
+    triggerDelete () {
+      if (this.hasOperateBox) {
+        this.$emit('delete')
+      }
     }
   },
   created () {},
