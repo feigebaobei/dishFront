@@ -211,7 +211,7 @@ export default {
       api.getCommentByDishId(this.dishId, {
         user: 'other'
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         let data = res.data.data
         this.dataComment.otherComments = util.propComposeArray(data, 'comments').reduce((r, c) => {
           c.author = c.author[0].username
@@ -276,7 +276,7 @@ export default {
                 this.dataComment.myComments = []
                 this.getCommentSelf()
                 // 清空当前评论
-                this.resetForm()                
+                this.resetForm()
               }).catch(err => {
                 console.log(err)
               })
@@ -303,7 +303,31 @@ export default {
       this.dataComment.commentId = data._id
     },
     gotoDeleteComment (data) {
-      console.log(data)
+      this.$confirm('删除评论后无法恢复', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // console.log(data)
+        // return
+        api.deleteComment(this.dishId, data._id).then(res => {
+          console.log(res)
+          // 更新我的评论
+          this.dataComment.myComments = []
+          this.getCommentSelf()
+          this.$message({
+            type: 'info',
+            message: '删除成功'
+          })
+        }).catch(err => {
+          console.log(err)
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     }
   },
   created () {},

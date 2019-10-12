@@ -39,7 +39,7 @@ let instance = (opt) => {
   inst.interceptors.request.use(config => { // config是axios的配置项
     config.headers.Authorization = `bearer ${store.getters.getToken}`
     // 因生命周期的原因需要在请求前添加Authorization
-    console.log(config)
+    // console.log(config)
     return config
   }, error => {
     return Promise.reject(error)
@@ -67,7 +67,6 @@ let instance = (opt) => {
         break
     }
     return Promise.reject(err)
-    return error
   })
   return inst
 }
@@ -139,6 +138,9 @@ const obj = {
   },
   editComment: (dishId, commentId, params, opt = {}) => {
     return instance(opt).put(`dish/${dishId}/comment/${commentId}`, params)
+  },
+  deleteComment: (dishId, commentId, opt = {}) => {
+    return instance(opt).delete(`dish/${dishId}/comment/${commentId}`)
   }
 }
 
