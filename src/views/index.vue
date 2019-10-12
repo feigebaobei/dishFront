@@ -35,7 +35,7 @@ export default {
         this.$refs.manage.classList.add('wait')
         api.isLogin().then(res => {
           this.$refs.manage.classList.remove('wait')
-          console.log(res)
+          // console.log(res)
           this.$router.push({
             path: '/' + path
           })

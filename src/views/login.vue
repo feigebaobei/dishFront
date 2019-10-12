@@ -2,7 +2,7 @@
   <div class="login bgImg1">
     <Form class="form" :model="userInfo" :label-width="80" :rules="ruleValidate" ref="form">
       <form-item label="账号" prop="username">
-        <Input v-model="userInfo.username" type="text" placeholder="请输入账号"/>
+        <Input v-model="userInfo.username" type="text" placeholder="请输入账号" @on-keyup.enter="submit"/>
       </form-item>
       <form-item label="密码" prop="password">
         <Input v-model="userInfo.password" type="password" placeholder="请输入密码"/>
@@ -59,7 +59,7 @@ export default {
           let token = res.data.data.token
           this.updateToken({token: token})
           this.updateUser(res.data.data.user)
-          // console.log('token', this.$store.state.user.token)
+          console.log('token', this.$store.state.user.token)
           if (this.url) {
             let urlDecode = decodeURIComponent(this.url)
             if (/^http/.test(urlDecode)) {
@@ -75,6 +75,9 @@ export default {
         }).catch(err => {
           console.log(err)
         })
+    },
+    test () {
+      console.log('234')
     },
     resetForm () {
       this.$refs.form.resetFields()

@@ -8,6 +8,7 @@ const mutations = {
   updateUser: (state, payload) => {
     // state.user = payload.user
     state.username = payload.username
+    localStorage.username = payload.username
   }
 }
 

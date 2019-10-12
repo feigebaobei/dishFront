@@ -30,7 +30,7 @@
         <h1>我的评论</h1>
       </header>
       <article class="myCommentBox">
-        <comment-card class="myCommentItem" v-for="(item, index) in dataComment.myComments" :key="index" :videoRating="item.videoRating" :odourRating="item.odourRating" :tasteRating="item.tasteRating" :content="item.content" :author="item.author" :createdAt="item.createdAt" :updatedAt="item.updatedAt"></comment-card>
+        <comment-card class="myCommentItem" v-for="(item, index) in dataComment.myComments" :key="index" :videoRating="item.videoRating" :odourRating="item.odourRating" :tasteRating="item.tasteRating" :content="item.content" :author="item.author" :createdAt="item.createdAt" :updatedAt="item.updatedAt" :hasOperateBox="true" @edit="gotoEditComment(item)" @delete="gotoDeleteComment(item)"></comment-card>
       </article>
     </section>
     <!-- comment current -->
@@ -120,71 +120,13 @@ export default {
       },
       dataComment: {
         myComments: [],
+        status: 'add',
+        commentId: '',
         video: 0,
         odour: 0,
         taste: 0,
         content: '',
         otherComments: []
-        // good: [
-        //   {
-        //     comment: '三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词',
-        //     author: '枯干****',
-        //     createdAt: '2019/09/08 12:34:56',
-        //     updatedAt: '2019/09/08 12:34:56'
-        //   },
-        //   {
-        //     comment: '三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词',
-        //     author: '枯干****',
-        //     createdAt: '2019/09/08 12:34:56',
-        //     updatedAt: '2019/09/08 12:34:56'
-        //   },
-        //   {
-        //     comment: '三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词',
-        //     author: '枯干****',
-        //     createdAt: '2019/09/08 12:34:56',
-        //     updatedAt: '2019/09/08 12:34:56'
-        //   }
-        // ],
-        // middle: [
-        //   {
-        //     comment: '三年学英语分册词三年级级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词',
-        //     author: '枯干****',
-        //     createdAt: '2019/09/08 12:34:56',
-        //     updatedAt: '2019/09/08 12:34:56'
-        //   },
-        //   {
-        //     comment: '三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词',
-        //     author: '枯干****',
-        //     createdAt: '2019/09/08 12:34:56',
-        //     updatedAt: '2019/09/08 12:34:56'
-        //   },
-        //   {
-        //     comment: '三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词',
-        //     author: '枯干****',
-        //     createdAt: '2019/09/08 12:34:56',
-        //     updatedAt: '2019/09/08 12:34:56'
-        //   }
-        // ],
-        // worse: [
-        //   {
-        //     comment: '三年级英语笑话:小学英语分册词三年级英语笑笑话:小学英语分册词三年级英语笑笑话:小学英语分册词三年级英语笑笑话:小学英语分册词三年级英语笑笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词',
-        //     author: '枯干****',
-        //     createdAt: '2019/09/08 12:34:56',
-        //     updatedAt: '2019/09/08 12:34:56'
-        //   },
-        //   {
-        //     comment: '三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词',
-        //     author: '枯干****',
-        //     createdAt: '2019/09/08 12:34:56',
-        //     updatedAt: '2019/09/08 12:34:56'
-        //   },
-        //   {
-        //     comment: '三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词三年级英语笑话:小学英语分册词',
-        //     author: '枯干****',
-        //     createdAt: '2019/09/08 12:34:56',
-        //     updatedAt: '2019/09/08 12:34:56'
-        //   }
-        // ]
       },
       ruleValidate: {
         content: {required: true, message: '请输入评论', trigger: 'change'}
@@ -301,22 +243,39 @@ export default {
             })
             return
           }
-          api.addComment(
-            this.dishId,
-            {
-              videoRating: this.dataComment.video,
-              odourRating: this.dataComment.odour,
-              tasteRating: this.dataComment.taste,
-              content: this.dataComment.content
-            }
-          ).then(res => {
-            // 更新我的评论
-            this.getCommentSelf()
-            // 清空当前评论
-            this.resetForm()
-          }).catch(err => {
-            console.log(err)
-          })
+          switch (this.dataComment.status) {
+            case 'add':
+            default:
+              api.addComment(
+                this.dishId,
+                {
+                  videoRating: this.dataComment.video,
+                  odourRating: this.dataComment.odour,
+                  tasteRating: this.dataComment.taste,
+                  content: this.dataComment.content
+                }
+              ).then(res => {
+                // 更新我的评论
+                this.getCommentSelf()
+                // 清空当前评论
+                this.resetForm()
+              }).catch(err => {
+                console.log(err)
+              })
+              break
+            case 'edit':
+              api.editComment(this.dishId, this.dataComment.commentId, {
+                videoRating: this.dataComment.video,
+                odourRating: this.dataComment.odour,
+                tasteRating: this.dataComment.taste,
+                content: this.dataComment.content
+              }).then(res => {
+                console.log(res)
+              }).catch(err => {
+                console.log(err)
+              })
+              break
+          }
         }
       })
     },
@@ -325,6 +284,20 @@ export default {
       this.dataComment.odour = 0
       this.dataComment.taste = 0
       this.$refs.form.resetFields()
+      this.dataComment.status = 'add'
+    },
+    gotoEditComment (data) {
+      console.log(data)
+      this.dataComment.status = 'edit'
+      // this.dataComment.status = 'add'
+      this.dataComment.video = data.videoRating
+      this.dataComment.odour = data.odourRating
+      this.dataComment.taste = data.tasteRating
+      this.dataComment.content = data.content
+      this.dataComment.commentId = data._id
+    },
+    gotoDeleteComment (data) {
+      console.log(data)
     }
   },
   created () {},

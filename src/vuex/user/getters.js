@@ -7,7 +7,7 @@ const getters = {
       return localStorage.token
     }
   },
-  getUserName: state => state.username
+  getUserName: state => state.username || localStorage.username
 }
 
 export default getters
